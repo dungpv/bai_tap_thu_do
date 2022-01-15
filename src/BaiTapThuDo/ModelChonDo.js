@@ -1,11 +1,42 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function ModelChonDo() {
+export default function ModelChonDo(props) {
+  const thuDoModel = useSelector(
+    (state) => state.BaiTapThuDoReducer.thuDoModel
+  );
+
+  const renderModel = () => {
+    return thuDoModel.map((item, index) => {
+      return (
+        <div
+          key={index}
+          className={item.name}
+          style={{
+            width: item.width,
+            height: item.height,
+            background: `url(${item.hinhAnh}) ${
+              item.name === "background" ? " no-repeat cover" : ""
+            }`,
+            position: item.position,
+            top: item.top,
+            left: item.left,
+            right: item.right,
+            bottom: item.bottom,
+            transform: item.transform,
+            zIndex: item.zIndex,
+          }}
+        />
+      );
+    });
+  };
+
   return (
     <div className="contain">
       <div className="body" />
       <div className="model" />
-      <div
+      {renderModel()}
+      {/* <div
         className="hairstyle"
         style={{
           width: 1000,
@@ -88,7 +119,7 @@ export default function ModelChonDo() {
         style={{
           backgroundImage: 'url("./images/background/background1.jpg")',
         }}
-      />
+      /> */}
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { thu_do } from "../types/BaiTapThuDoTypes";
+
 const initialState = {
   navPills: [
     {
@@ -277,10 +279,123 @@ const initialState = {
       imgSrc_png: "./images/background/background4.jpg",
     },
   ],
+  thuDoModel: [
+    {
+      id: "hairstyle",
+      name: "hairstyle",
+      hinhAnh: "./images/hairstyle/hairstyle3.png",
+      width: 1000,
+      height: 1000,
+      position: "absolute",
+      top: "-75%",
+      left: "",
+      right: "-57%",
+      bottom: "",
+      transform: "scale(0.15)",
+      zIndex: 4,
+    },
+    {
+      id: "necklaces",
+      name: "necklace",
+      hinhAnh: "./images/necklaces/necklace3.png",
+      width: 500,
+      height: 1000,
+      position: "absolute",
+      top: "",
+      left: "",
+      bottom: "-40%",
+      right: "-3.5%",
+      zIndex: 4,
+      transform: "scale(0.5)",
+    },
+    {
+      id: "topclothes",
+      name: "bikinitop",
+      hinhAnh: "./images/clothes/topcloth5.png",
+      width: 500,
+      height: 500,
+      position: "absolute",
+      top: "-9%",
+      left: "-5%",
+      bottom: "",
+      right: "",
+      zIndex: 3,
+      transform: "scale(0.5)",
+    },
+    {
+      id: "botclothes",
+      name: "bikinibottom",
+      hinhAnh: "./images/clothes/botcloth4.png",
+      width: 500,
+      height: 1000,
+      position: "absolute",
+      top: "-30%",
+      left: "-5%",
+      bottom: "",
+      right: "",
+      zIndex: 2,
+      transform: "scale(0.5)",
+    },
+    {
+      id: "handbags",
+      name: "handbag",
+      hinhAnh: "./images/handbags/handbag2.png",
+      width: 500,
+      height: 1000,
+      position: "absolute",
+      top: "",
+      left: "",
+      bottom: "-40%",
+      right: "-3.5%",
+      zIndex: 4,
+      transform: "scale(0.5)",
+    },
+    {
+      id: "shoes",
+      name: "feet",
+      hinhAnh: "./images/shoes/shoes2.png",
+      width: 500,
+      height: 1000,
+      position: "absolute",
+      top: "",
+      left: "",
+      bottom: "-37%",
+      right: "-3.5%",
+      zIndex: 1,
+      transform: "scale(0.5)",
+    },
+    {
+      id: "background",
+      name: "background",
+      hinhAnh: "./images/background/background1.jpg",
+      width: 900,
+      height: 1500,
+      position: "absolute",
+      top: "",
+      left: "",
+      bottom: "-90%",
+      right: "-50%",
+      transform: "scale(0.5)",
+      zIndex: -1,
+    },
+  ],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case thu_do: {
+      let { loaiDo, hinhAnh } = action;
+
+      let thuDoModelUpdate = [...state.thuDoModel];
+      let index = thuDoModelUpdate.findIndex((thuDo) => thuDo.id === loaiDo);
+
+      if (index !== -1) {
+        thuDoModelUpdate[index].hinhAnh = hinhAnh;
+      }
+      state.thuDoModel = thuDoModelUpdate;
+
+      return { ...state };
+    }
     default:
       return { ...state };
   }

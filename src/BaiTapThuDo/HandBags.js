@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import ThuDoItem from "./ThuDoItem";
 
 export default function HandBags() {
   const typeThuDo = "handbags";
@@ -10,13 +11,7 @@ export default function HandBags() {
       if (handBags[item].type === typeThuDo) {
         return (
           <div className="col-md-3" key={index}>
-            <div className="card text-center">
-              <img src={handBags[item].imgSrc_jpg} />
-              <h4>
-                <b>{handBags[item].name}</b>
-              </h4>
-              <button className="btn btn-success">Thử đồ</button>
-            </div>
+            <ThuDoItem thuDoItem={handBags[item]} />
           </div>
         );
       }
