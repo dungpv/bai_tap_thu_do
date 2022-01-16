@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useMeasure } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSpring, animated, useEffect } from "react-spring";
 
 export default function ModelChonDo(props) {
   const thuDoModel = useSelector(
@@ -9,7 +10,7 @@ export default function ModelChonDo(props) {
   const renderModel = () => {
     return thuDoModel.map((item, index) => {
       return (
-        <div
+        <animated.div
           key={index}
           className={item.name}
           style={{
@@ -23,8 +24,12 @@ export default function ModelChonDo(props) {
             left: item.left,
             right: item.right,
             bottom: item.bottom,
-            transform: item.transform,
+            transform: `${item.transform}`,
             zIndex: item.zIndex,
+            transitionDelay: "1s",
+            transitionProperty: "background-color font-size transform color",
+            transitionTimingFunction: "linear",
+            transitionDuration: "1s",
           }}
         />
       );

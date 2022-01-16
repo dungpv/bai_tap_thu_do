@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BaiTapThuDoTypes, thu_do } from "../redux/types/BaiTapThuDoTypes";
+import { thu_do } from "../redux/types/BaiTapThuDoTypes";
+import { useSpring, animated } from "react-spring";
 
 export default function ThuDoItem(props) {
   const dispatch = useDispatch();
   const { thuDoItem } = props;
 
+  const [scaleAnim, setAnimation] = useState(true);
+  const { propsAnim } = useSpring({
+    from: { propsAnim: 0 },
+    propsAnim: scaleAnim ? 1 : 0,
+    config: { duration: 1000 },
+  });
+
   return (
     <div className="card text-center">
-      <img src={thuDoItem.imgSrc_jpg} />
+      <animated.img
+        src={thuDoItem.imgSrc_jpg}
+        style={{
+          scale: propsAnim.to({
+            range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+            output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1],
+          }),
+        }}
+      />
       <h4>
         <b>{thuDoItem.name}</b>
       </h4>
-      <button
+      <animated.button
         className="btn btn-success"
+        style={{
+          scale: propsAnim.to({
+            range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+            output: [1, 0.97, 0.9, 1.1, 0.9, 1.2, 1.1, 1],
+          }),
+        }}
         onClick={() => {
+          setAnimation(!scaleAnim);
           dispatch({
             type: thu_do,
             loaiDo: thuDoItem.type,
@@ -23,7 +46,7 @@ export default function ThuDoItem(props) {
         }}
       >
         Thử đồ
-      </button>
+      </animated.button>
     </div>
   );
 }
